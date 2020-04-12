@@ -8,6 +8,8 @@ namespace MicroBanking.Domain.Core.Bus
     {
         Task SendCommand<T>(T command) where T : Command;
         void Publish<T>(T @event) where T : Event;
-        void Subscribe<T, TH>() where T : Event where TH : IEventHandler<T>;
+        void Subscribe<T, TH>() 
+            where T : Event 
+            where TH : IEventHandler<T>;
     }
 }

@@ -5,6 +5,6 @@ namespace MicroBanking.Domain.Core.Bus
 {
     public interface IEventHandler<in TEvent> where TEvent : Event
     {
-        Task Handle(TEvent ev);
+        Task Handle(TEvent @event);
     }
 }

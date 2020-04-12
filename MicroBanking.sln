@@ -7,13 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{22E37724-6226-4105-A8EE-B005D27ECB6C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{631CF7AD-A786-4040-80BD-CB93454E8E8B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{631CF7AD-A786-4040-80BD-CB93454E8E8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{054ECD6C-E347-4D76-AE61-9B0714541E21}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{049CF092-7350-44A3-8243-5035D51D55C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroBanking.Domain.Core", "MicroBanking.Domain.Core\MicroBanking.Domain.Core.csproj", "{6B943D9A-9B56-45CF-9E1C-BAAAE03B35C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroBanking.Infrastructure.Bus", "MicroBanking.Infrastructure.Bus\MicroBanking.Infrastructure.Bus.csproj", "{87B3C90C-6934-4CFB-BB48-11DB54941EE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,12 +27,17 @@ Global
 		{6B943D9A-9B56-45CF-9E1C-BAAAE03B35C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B943D9A-9B56-45CF-9E1C-BAAAE03B35C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B943D9A-9B56-45CF-9E1C-BAAAE03B35C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B3C90C-6934-4CFB-BB48-11DB54941EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B3C90C-6934-4CFB-BB48-11DB54941EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B3C90C-6934-4CFB-BB48-11DB54941EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B3C90C-6934-4CFB-BB48-11DB54941EE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6B943D9A-9B56-45CF-9E1C-BAAAE03B35C8} = {22E37724-6226-4105-A8EE-B005D27ECB6C}
+		{87B3C90C-6934-4CFB-BB48-11DB54941EE7} = {631CF7AD-A786-4040-80BD-CB93454E8E8B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8EF1C7B-2532-4D12-A26F-807DD1FFBEE8}
