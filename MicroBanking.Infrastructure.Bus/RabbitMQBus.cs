@@ -2,6 +2,7 @@
 using MicroBanking.Domain.Core.Bus;
 using MicroBanking.Domain.Core.Commands;
 using MicroBanking.Domain.Core.Events;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -18,10 +19,12 @@ namespace MicroBanking.Infrastructure.Bus
         private readonly IMediator mediator;
         private readonly IDictionary<string, IList<Type>> handlers;
         private readonly IList<Type> eventTypes;
+        private readonly IServiceScopeFactory serviceScopeFactory;
 
-        public RabbitMQBus(IMediator mediator)
+        public RabbitMQBus(IMediator mediator, IServiceScopeFactory serviceScopeFactory)
         {
             this.mediator = mediator;
+            this.serviceScopeFactory = serviceScopeFactory;
             handlers = new Dictionary<string, IList<Type>>();
             eventTypes = new List<Type>();
         }
@@ -115,17 +118,20 @@ namespace MicroBanking.Infrastructure.Bus
         {
             if (handlers.ContainsKey(eventName))
             {
-                var subscriptions = handlers[eventName];
-                foreach (var subscription in subscriptions)
+                using (var scope = serviceScopeFactory.CreateScope())
                 {
-                    var handler = Activator.CreateInstance(subscription);
-                    if (handler != null)
+                    var subscriptions = handlers[eventName];
+                    foreach (var subscription in subscriptions)
                     {
-                        var eventType = eventTypes.SingleOrDefault(t => t.Name == eventName);
-                        var @event = JsonConvert.DeserializeObject(message, eventType);
+                        var handler = scope.ServiceProvider.GetService(subscription);
+                        if (handler != null)
+                        {
+                            var eventType = eventTypes.SingleOrDefault(t => t.Name == eventName);
+                            var @event = JsonConvert.DeserializeObject(message, eventType);
 
-                        var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                            var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                            await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                        }
                     }
                 }
             }

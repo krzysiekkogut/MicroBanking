@@ -7,5 +7,6 @@ namespace MicroBanking.Transfer.Domain.Interfaces
     public interface ITransferRepository
     {
         Task<IEnumerable<TransferLog>> GetAllAsync();
+        Task AddAsync(TransferLog transferLog);
     }
 }

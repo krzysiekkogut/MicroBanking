@@ -23,14 +23,17 @@ namespace MicroBanking.Infrastructure.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            // Domain Bus
-            services.AddTransient<IEventBus, RabbitMQBus>();
+            // Event Bus
+            services.AddSingleton<IEventBus, RabbitMQBus>();
 
-            // Banking Commands
-            services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
+            // Commands
+            services.AddTransient<IRequestHandler<CreateTransferCommand>, TransferCommandHandler>();
 
-            // Transfer Events
+            // Events
             services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
+
+            // Subscriptions
+            services.AddTransient<TransferEventHandler>();
 
             // Services
             services.AddTransient<IAccountService, AccountService>();

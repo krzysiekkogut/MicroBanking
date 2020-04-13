@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MicroBanking.Banking.Domain.CommandHandlers
 {
-    public class TransferCommandHandler : IRequestHandler<CreateTransferCommand, bool>
+    public class TransferCommandHandler : IRequestHandler<CreateTransferCommand>
     {
         private readonly IEventBus eventBus;
 
@@ -16,15 +16,15 @@ namespace MicroBanking.Banking.Domain.CommandHandlers
             this.eventBus = eventBus;
         }
 
-        public Task<bool> Handle(CreateTransferCommand request, CancellationToken cancellationToken)
+        public Task<Unit> Handle(CreateTransferCommand request, CancellationToken cancellationToken)
         {
             eventBus.Publish(
-                new TransferCreatedEvent(
-                    request.SourceAccountId,
-                    request.TargetAccountId,
-                    request.Amount)
-                );
-            return Task.FromResult(true);
+               new TransferCreatedEvent(
+                   request.SourceAccountId,
+                   request.TargetAccountId,
+                   request.Amount)
+               );
+            return Unit.Task;
         }
     }
 }

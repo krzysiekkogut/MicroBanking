@@ -20,5 +20,12 @@ namespace MicroBanking.Transfer.Data.Repository
         {
             return await dbContext.Transfers.ToListAsync();
         }
+
+        public async Task AddAsync(TransferLog transferLog)
+        {
+            await dbContext.AddAsync(transferLog);
+            await dbContext.SaveChangesAsync();
+        }
+
     }
 }
