@@ -1,8 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroBanking.Domain.Core\MicroBanking.Domain.Core.csproj" />
+  </ItemGroup>
 
 </Project>

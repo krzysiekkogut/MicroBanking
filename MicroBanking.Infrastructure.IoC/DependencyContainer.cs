@@ -8,6 +8,13 @@ using MicroBanking.Banking.Domain.Commands;
 using MicroBanking.Banking.Domain.Interfaces;
 using MicroBanking.Domain.Core.Bus;
 using MicroBanking.Infrastructure.Bus;
+using MicroBanking.Transfer.Application.Interfaces;
+using MicroBanking.Transfer.Application.Services;
+using MicroBanking.Transfer.Data.Context;
+using MicroBanking.Transfer.Data.Repository;
+using MicroBanking.Transfer.Domain.EventHandlers;
+using MicroBanking.Transfer.Domain.Events;
+using MicroBanking.Transfer.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MicroBanking.Infrastructure.IoC
@@ -22,12 +29,18 @@ namespace MicroBanking.Infrastructure.IoC
             // Banking Commands
             services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
 
-            // Aplication Services
+            // Transfer Events
+            services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
+
+            // Services
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ITransferService, TransferService>();
 
             // Data
             services.AddTransient<BankingDbContext>();
+            services.AddTransient<TransferDbContext>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<ITransferRepository, TransferRepository>();
         }
     }
 }
