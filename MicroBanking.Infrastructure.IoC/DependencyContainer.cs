@@ -1,7 +1,10 @@
-﻿using MicroBanking.Banking.Application.Interfaces;
+﻿using MediatR;
+using MicroBanking.Banking.Application.Interfaces;
 using MicroBanking.Banking.Application.Services;
 using MicroBanking.Banking.Data.Context;
 using MicroBanking.Banking.Data.Repository;
+using MicroBanking.Banking.Domain.CommandHandlers;
+using MicroBanking.Banking.Domain.Commands;
 using MicroBanking.Banking.Domain.Interfaces;
 using MicroBanking.Domain.Core.Bus;
 using MicroBanking.Infrastructure.Bus;
@@ -15,6 +18,9 @@ namespace MicroBanking.Infrastructure.IoC
         {
             // Domain Bus
             services.AddTransient<IEventBus, RabbitMQBus>();
+
+            // Banking Commands
+            services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
 
             // Aplication Services
             services.AddTransient<IAccountService, AccountService>();

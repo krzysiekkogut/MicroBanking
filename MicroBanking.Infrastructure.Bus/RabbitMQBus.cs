@@ -41,7 +41,7 @@ namespace MicroBanking.Infrastructure.Bus
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             var eventName = @event.GetType().Name;
-            channel.QueueDeclare(eventName, autoDelete: false);
+            channel.QueueDeclare(queue: eventName, exclusive: false, autoDelete: false);
 
             var message = JsonConvert.SerializeObject(@event);
             var body = Encoding.UTF8.GetBytes(message);
@@ -89,7 +89,7 @@ namespace MicroBanking.Infrastructure.Bus
 
             var eventName = typeof(T).Name;
 
-            channel.QueueDeclare(eventName, autoDelete: false);
+            channel.QueueDeclare(queue: eventName, exclusive: false, autoDelete: false);
 
             var consumer = new AsyncEventingBasicConsumer(channel);
             consumer.Received += ConsumerReceived;
