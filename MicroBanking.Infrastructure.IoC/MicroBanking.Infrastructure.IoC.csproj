@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MicroBanking.Banking.Application\MicroBanking.Banking.Application.csproj" />
+    <ProjectReference Include="..\MicroBanking.Banking.Data\MicroBanking.Banking.Data.csproj" />
     <ProjectReference Include="..\MicroBanking.Domain.Core\MicroBanking.Domain.Core.csproj" />
     <ProjectReference Include="..\MicroBanking.Infrastructure.Bus\MicroBanking.Infrastructure.Bus.csproj" />
   </ItemGroup>

@@ -119,16 +119,14 @@ namespace MicroBanking.Infrastructure.Bus
                 foreach (var subscription in subscriptions)
                 {
                     var handler = Activator.CreateInstance(subscription);
-                    if (handler == null)
+                    if (handler != null)
                     {
-                        continue;
+                        var eventType = eventTypes.SingleOrDefault(t => t.Name == eventName);
+                        var @event = JsonConvert.DeserializeObject(message, eventType);
+
+                        var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
                     }
-                    
-                    var eventType = eventTypes.SingleOrDefault(t => t.Name == eventName);
-                    var @event = JsonConvert.DeserializeObject(message, eventType);
-                    
-                    var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
                 }
             }
         }
