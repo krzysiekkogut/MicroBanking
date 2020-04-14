@@ -29,9 +29,9 @@ namespace MicroBanking.Infrastructure.Bus
             eventTypes = new List<Type>();
         }
 
-        public Task SendCommand<T>(T command) where T : Command
+        public async Task SendCommandAsync<T>(T command) where T : Command
         {
-            return mediator.Send(command);
+            await mediator.Send(command);
         }
 
         public void Publish<T>(T @event) where T : Event

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace MicroBanking.Transfer.Api.Controllers
 {
     [Route("/api/[controller]")]
-    public class TransferController : Controller
+    [ApiController]
+    public class TransferController : ControllerBase
     {
         private readonly ITransferService transferService;
 

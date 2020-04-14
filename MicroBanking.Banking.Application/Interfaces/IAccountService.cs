@@ -8,6 +8,6 @@ namespace MicroBanking.Banking.Application.Interfaces
     public interface IAccountService
     {
         Task<IEnumerable<Account>> GetAllAsync();
-        void Transfer(AccountTransfer accountTransfer);
+        Task TransferAsync(AccountTransfer accountTransfer);
     }
 }

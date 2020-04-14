@@ -24,7 +24,7 @@ namespace MicroBanking.Banking.Domain.CommandHandlers
                    request.TargetAccountId,
                    request.Amount)
                );
-            return Unit.Task;
+            return Task.FromResult(Unit.Value);
         }
     }
 }

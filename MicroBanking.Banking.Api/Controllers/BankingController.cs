@@ -25,9 +25,9 @@ namespace MicroBanking.Banking.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostAccountTransfre([FromBody] AccountTransfer accountTransfer)
+        public async Task<IActionResult> PostAccountTransfer([FromBody] AccountTransfer accountTransfer)
         {
-            accountService.Transfer(accountTransfer);
+            await accountService.TransferAsync(accountTransfer);
             return Ok(accountTransfer);
         }
     }

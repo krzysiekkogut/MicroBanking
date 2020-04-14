@@ -25,13 +25,13 @@ namespace MicroBanking.Banking.Application.Services
             return await repository.GetAllAsync();
         }
 
-        public void Transfer(AccountTransfer accountTransfer)
+        public async Task TransferAsync(AccountTransfer accountTransfer)
         {
             var createTransferCommand = new CreateTransferCommand(
                 accountTransfer.SourceAccountId,
                 accountTransfer.TargetAccountId,
                 accountTransfer.Amount);
-            eventBus.SendCommand(createTransferCommand);
+            await eventBus.SendCommandAsync(createTransferCommand);
         }
     }
 }

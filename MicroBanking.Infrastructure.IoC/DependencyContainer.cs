@@ -27,7 +27,7 @@ namespace MicroBanking.Infrastructure.IoC
             services.AddSingleton<IEventBus, RabbitMQBus>();
 
             // Commands
-            services.AddTransient<IRequestHandler<CreateTransferCommand>, TransferCommandHandler>();
+            services.AddTransient<IRequestHandler<CreateTransferCommand, Unit>, TransferCommandHandler>();
 
             // Events
             services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
